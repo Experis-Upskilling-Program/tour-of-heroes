@@ -15,8 +15,14 @@
 </label>
 </div>
 
+<section class="heroes">
+  <div class="hero-information" *ngFor="let hero of heroes" (click)="onSelected(hero)">
+    <p class="hero-name">{{hero.name}} <span class="hero-alterego" *ngIf="hero.alterego">({{hero.alterego}})</span></p>
+  </div>
+</section>
 
-<h5>Reactive forms</h5>
+
+<!-- <h5>Reactive forms</h5>
 <form [formGroup]="formHeroe" (ngSubmit)="onSubmit()">
   <label> Name:
     <input type="text" formControlName="name"/>
@@ -27,4 +33,4 @@
   </label>
 
   <button type="submit">Mostrar</button>
-</form>
+</form> -->

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Heroe } from 'src/app/interface/heroe';
-
+import { HEROES } from 'src/app/data/mock';
 
 @Component({
   selector: 'app-heroes',
@@ -15,6 +15,9 @@ export class HeroesComponent {
     alterego : 'Superman'
   }
 
+  heroes: Heroe[] = HEROES;
+
+  selectedHero: Heroe | undefined;
 
     formHeroe = new FormGroup(
       {
@@ -25,5 +28,10 @@ export class HeroesComponent {
 
     onSubmit () {
       console.log(this.formHeroe.value);
+    }
+
+    onSelected(hero: Heroe): void {
+      console.log(hero);
+      this.selectedHero = hero;
     }
 }
