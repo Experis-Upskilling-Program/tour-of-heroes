@@ -5,13 +5,13 @@
 
 <h5>Template driven forms</h5>
 
-<div>
+<div *ngIf="selectedHero">
 <label> Name:
-  <input type="text" [(ngModel)]="heroe.name"/>
+  <input type="text" [(ngModel)]="selectedHero.name"/>
 </label>
 
 <label *ngIf="heroe.alterego"> Alterego:
-  <input type="text" [(ngModel)]="heroe.alterego"/>
+  <input type="text" [(ngModel)]="selectedHero.alterego"/>
 </label>
 </div>
 
