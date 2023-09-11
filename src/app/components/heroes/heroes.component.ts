@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Heroe } from 'src/app/interface/heroe';
-
+import { HEROES } from 'src/app/data/mock';
 
 @Component({
   selector: 'app-heroes',
@@ -10,20 +10,23 @@ import { Heroe } from 'src/app/interface/heroe';
 })
 export class HeroesComponent {
   heroe: Heroe = {
-    id : 1,
+    id: 1,
     name: 'Clark Kent',
-    alterego : 'Superman'
+    alterego: 'Superman',
+  };
+
+  heroes:Heroe[] = HEROES;
+
+  formHeroe = new FormGroup({
+    name: new FormControl(''),
+    alterego: new FormControl(''),
+  });
+
+  onSubmit() {
+    console.log(this.formHeroe.value);
   }
 
-
-    formHeroe = new FormGroup(
-      {
-        name: new FormControl(''),
-        alterego:new FormControl('')
-      }
-    );
-
-    onSubmit () {
-      console.log(this.formHeroe.value);
-    }
+  onSelected(hero:Heroe):void{
+    console.log(hero)
+  }
 }
