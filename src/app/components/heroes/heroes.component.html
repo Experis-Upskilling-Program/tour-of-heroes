@@ -1,0 +1,30 @@
+<h2>HEROE</h2>
+<h4>ID: {{heroe.id}}</h4>
+<h4>NAME: {{heroe.name}}</h4>
+<h4 *ngIf="heroe.alterego">ALTEREGO: {{heroe.alterego}}</h4>
+
+<h5>Template driven forms</h5>
+
+<div>
+<label> Name:
+  <input type="text" [(ngModel)]="heroe.name"/>
+</label>
+
+<label *ngIf="heroe.alterego"> Alterego:
+  <input type="text" [(ngModel)]="heroe.alterego"/>
+</label>
+</div>
+
+
+<h5>Reactive forms</h5>
+<form [formGroup]="formHeroe" (ngSubmit)="onSubmit()">
+  <label> Name:
+    <input type="text" formControlName="name"/>
+  </label>
+
+  <label *ngIf="heroe.alterego"> Alterego:
+    <input type="text" formControlName="alterego"/>
+  </label>
+
+  <button type="submit">Mostrar</button>
+</form>
