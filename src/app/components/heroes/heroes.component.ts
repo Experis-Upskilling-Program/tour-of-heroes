@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Heroe } from 'src/app/interface/heroe';
 import { HeroesService } from '../../services/heroes.service';
+import { MessagesService } from 'src/app/services/messages.service';
 
 
 @Component({
@@ -24,7 +25,7 @@ export class HeroesComponent implements OnInit{
   });
 
 
-  constructor(private heroesService:HeroesService){}
+  constructor(private heroesService:HeroesService, private messageService:MessagesService){}
 
   ngOnInit(): void {
     this.getHeroes();
@@ -38,6 +39,8 @@ export class HeroesComponent implements OnInit{
 
   }
 
+
+
   selectedHero: Heroe | undefined;
 
     onSubmit () {
@@ -47,5 +50,6 @@ export class HeroesComponent implements OnInit{
     onSelected(hero: Heroe): void {
       console.log(hero);
       this.selectedHero = hero;
+      this.messageService.add(`Estoy seleccionando al heroe ${hero.name}`)
     }
 }

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 export class MessagesService {
   constructor() {}
 
-  messages!: Array<string>;
+  messages: Array<string> = []
 
   add(message: string) {
     this.messages.push(message);
