@@ -22,11 +22,14 @@ export class HeroesComponent {
     alterego: new FormControl(''),
   });
 
-  onSubmit() {
-    console.log(this.formHeroe.value);
-  }
+  selectedHero: Heroe | undefined;
 
-  onSelected(hero:Heroe):void{
-    console.log(hero)
-  }
+    onSubmit () {
+      console.log(this.formHeroe.value);
+    }
+
+    onSelected(hero: Heroe): void {
+      console.log(hero);
+      this.selectedHero = hero;
+    }
 }
