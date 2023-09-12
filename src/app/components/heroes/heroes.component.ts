@@ -1,26 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Heroe } from 'src/app/interface/heroe';
-import { HEROES } from 'src/app/data/mock';
+import { HeroesService } from '../../services/heroes.service';
+
 
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
   styleUrls: ['./heroes.component.css'],
 })
-export class HeroesComponent {
+export class HeroesComponent implements OnInit{
   heroe: Heroe = {
     id: 1,
     name: 'Clark Kent',
-    alterego: 'Superman',
-  };
+    alterego : 'Superman'
+  }
 
-  heroes:Heroe[] = HEROES;
+  heroes:Heroe[]=[];
 
   formHeroe = new FormGroup({
     name: new FormControl(''),
     alterego: new FormControl(''),
   });
+
+
+  constructor(private heroesService:HeroesService){}
+
+  ngOnInit(): void {
+    this.getHeroes();
+  }
+
+  getHeroes(){
+    this.heroesService.getHeroes().subscribe(data =>{
+      console.log(data);
+      this.heroes=data;
+    });
+
+  }
 
   selectedHero: Heroe | undefined;
 
