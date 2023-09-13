@@ -1,1 +1,6 @@
-<p>dashboard works!</p>
+<p>{{ heroes | json }}</p>
+<ul>
+  <li *ngFor="let heroe of heroes" >
+    <a href="">{{heroe.name}}</a>
+  </li>
+</ul>
