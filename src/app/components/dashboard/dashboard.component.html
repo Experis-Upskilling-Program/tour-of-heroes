@@ -1,0 +1,6 @@
+<p>{{ heroes | json }}</p>
+<ul>
+  <li *ngFor="let heroe of heroes" >
+    <a routerLink="/detail-hero/{{heroe.id}}">{{heroe.name}}</a>
+  </li>
+</ul>
