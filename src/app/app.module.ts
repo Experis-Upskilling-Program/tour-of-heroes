@@ -10,6 +10,8 @@ import { HeroDetailComponent } from './components/hero-detail/hero-detail.compon
 import { MessagesComponent } from './components/messages/messages.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { HeaderComponent } from './components/header/header.component';
 
 
 
@@ -20,7 +22,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     HeroDetailComponent,
     MessagesComponent,
     DashboardComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    FooterComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
