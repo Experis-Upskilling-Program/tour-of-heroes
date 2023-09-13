@@ -12,6 +12,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { DetailHeroComponent } from './components/detail-hero/detail-hero.component';
 
 
 
@@ -24,7 +25,8 @@ import { HeaderComponent } from './components/header/header.component';
     DashboardComponent,
     NotFoundComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    DetailHeroComponent
   ],
   imports: [
     BrowserModule,
