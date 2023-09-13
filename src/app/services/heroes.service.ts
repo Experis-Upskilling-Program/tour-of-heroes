@@ -16,4 +16,11 @@ export class HeroesService {
     this.messageService.add('Obteniendo listado de héroes');
     return of(HEROES);
   }
+
+  getHeroeById(id:number): Observable<Heroe>{
+    let list = HEROES.filter(hero=> hero.id == id)
+
+
+    return of(list[0])
+  }
 }
