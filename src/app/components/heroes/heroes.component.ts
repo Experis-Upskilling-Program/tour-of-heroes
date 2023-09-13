@@ -39,8 +39,6 @@ export class HeroesComponent implements OnInit{
 
   }
 
-
-
   selectedHero: Heroe | undefined;
 
     onSubmit () {
@@ -50,6 +48,6 @@ export class HeroesComponent implements OnInit{
     onSelected(hero: Heroe): void {
       console.log(hero);
       this.selectedHero = hero;
-      this.messageService.add(`Estoy seleccionando al heroe ${hero.name}`)
+      this.messageService.add(`Estoy seleccionando al heroe: ${hero.name}`)
     }
 }

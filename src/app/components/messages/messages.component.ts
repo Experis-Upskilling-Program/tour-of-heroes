@@ -7,7 +7,16 @@ import { MessagesService } from 'src/app/services/messages.service';
   styleUrls: ['./messages.component.css'],
 })
 export class MessagesComponent {
-  messages!: Array<string>;
+  messages: Array<string> = [];
 
-  constructor(public messageService:MessagesService) {}
+  constructor(private messageService: MessagesService) {}
+
+  getMessages() {
+    console.log(this.messageService.message)
+    this.messages = this.messageService.message;
+  }
+
+  clear() {
+    this.messageService.clear();
+  }
 }
