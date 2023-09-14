@@ -1,4 +1,5 @@
-<p>{{ heroes | json }}</p>
+<!-- <p>{{ heroes | json }}</p> -->
+<h2>COMPONENTE DASHBOARD</h2>
 <ul>
   <li *ngFor="let heroe of heroes" >
     <a routerLink="/detail-hero/{{heroe.id}}">{{heroe.name}}</a>

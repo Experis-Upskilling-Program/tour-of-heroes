@@ -1,1 +1,14 @@
-<p>{{heroe|json}}</p>
+<!-- <p>{{heroe|json}}</p> -->
+<h2>COMPONENTE DETAIL HERO</h2>
+<div *ngIf="heroe">
+  <label>
+    Name:
+    <input type="text" [(ngModel)]="heroe.name" />
+  </label>
+
+  <label *ngIf="heroe.alterego">
+    Alterego:
+    <input type="text" [(ngModel)]="heroe.alterego" />
+  </label>
+</div>
+<button type="button" (click)="goBack()">Back</button>
