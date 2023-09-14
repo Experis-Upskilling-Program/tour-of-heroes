@@ -10,15 +10,15 @@ import { MessagesService } from './messages.service';
 export class HeroesService {
   heroes: Heroe[] | undefined;
 
-  constructor(private messageService:MessagesService) {}
+  constructor(private messageService: MessagesService) { }
 
   getHeroes(): Observable<Heroe[]> {
     this.messageService.add('Obteniendo listado de héroes');
     return of(HEROES);
   }
 
-  getHeroeById(id:number): Observable<Heroe>{
-    let list = HEROES.filter(hero=> hero.id == id)
+  getHeroeById(id: number): Observable<Heroe> {
+    let list = HEROES.filter(hero => hero.id == id)
 
 
     return of(list[0])
@@ -28,10 +28,30 @@ export class HeroesService {
     const sortHeroes = HEROES.sort((a, b) => b.score - a.score);
     const topHeroes = [];
 
-    for(let i = 0; i < heroesNumber && heroesNumber < sortHeroes.length; i++) {
+    for (let i = 0; i < heroesNumber && heroesNumber < sortHeroes.length; i++) {
       topHeroes.push(sortHeroes[i]);
     }
 
     return of(topHeroes);
+  }
+
+  getRandomArbitrary(min: number, max: number) {
+    return Math.round(Math.random() * (max - min) + min);
+  }
+
+  getRandomHeroes(heroesNumber: number): Observable<Heroe[]> {
+    const randomIndexes: any = new Set();
+    const randomHeroes: Heroe[] = [];
+
+    do {
+      const randomSelection: number = this.getRandomArbitrary(0, HEROES.length - 1);
+      randomIndexes.add(randomSelection);
+    } while (randomIndexes.size < heroesNumber);
+
+    for (const index of randomIndexes) {
+      randomHeroes.push(HEROES[index]);
+    }
+
+    return of(randomHeroes);
   }
 }

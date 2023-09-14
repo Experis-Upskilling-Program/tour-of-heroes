@@ -1,9 +1,3 @@
-<h2>COMPONENTE HEROES</h2>
-<h2>HEROE</h2>
-<h4>ID: {{heroe.id}}</h4>
-<h4>NAME: {{heroe.name}}</h4>
-<h4 *ngIf="heroe.alterego">ALTEREGO: {{heroe.alterego}}</h4>
-
 <section class="heroes">
   <div class="hero-information" *ngFor="let hero of heroes" (click)="onSelected(hero)">
     <p class="hero-name">{{hero.name}} <span class="hero-alterego" *ngIf="hero.alterego">({{hero.alterego}})</span></p>
