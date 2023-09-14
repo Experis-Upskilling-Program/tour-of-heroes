@@ -11,12 +11,6 @@ import { MessagesService } from 'src/app/services/messages.service';
   styleUrls: ['./heroes.component.css'],
 })
 export class HeroesComponent implements OnInit{
-  heroe: Heroe = {
-    id: 1,
-    name: 'Clark Kent',
-    alterego : 'Superman'
-  }
-
   heroes:Heroe[]=[];
 
   formHeroe = new FormGroup({

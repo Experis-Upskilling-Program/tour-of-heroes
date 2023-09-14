@@ -23,4 +23,15 @@ export class HeroesService {
 
     return of(list[0])
   }
+
+  getTopHeroes(heroesNumber: number): Observable<Heroe[]> {
+    const sortHeroes = HEROES.sort((a, b) => b.score - a.score);
+    const topHeroes = [];
+
+    for(let i = 0; i < heroesNumber && heroesNumber < sortHeroes.length; i++) {
+      topHeroes.push(sortHeroes[i]);
+    }
+
+    return of(topHeroes);
+  }
 }
