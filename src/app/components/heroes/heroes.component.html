@@ -1,7 +1,12 @@
 <section class="heroes">
-  <div class="hero-information" *ngFor="let hero of heroes" (click)="onSelected(hero)">
+  <!-- <div class="hero-information" *ngFor="let hero of heroes" (click)="onSelected(hero)">
     <p class="hero-name">{{hero.name}} <span class="hero-alterego" *ngIf="hero.alterego">({{hero.alterego}})</span></p>
-  </div>
+  </div> -->
+  <ul class="hero-information" *ngFor="let hero of heroes" (click)="onSelected(hero)">
+    <li>
+      <a routerLink="/detail-hero/{{hero.id}}">{{hero.name}} <span class="hero-alterego" *ngIf="hero.alterego">({{hero.alterego}})</span></a>
+    </li>
+  </ul>
 </section>
 
 <app-hero-detail [selectedHero]="selectedHero"></app-hero-detail>
