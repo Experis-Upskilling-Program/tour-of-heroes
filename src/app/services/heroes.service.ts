@@ -4,22 +4,45 @@ import { Heroe } from '../interface/heroe';
 import { Observable, of } from 'rxjs';
 import { MessagesService } from './messages.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { catchError, map, tap } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class HeroesService {
+export class HeroesService{
   heroes: Heroe[] | undefined;
   private heroesUrl = 'api/heroes'; //:base/:collectionName
+
 
   constructor(
     private messageService: MessagesService,
     private httpClient: HttpClient
   ) {}
 
+
+  private log(message : string){
+    this.messageService.add(`Hero service: ${message}`)
+  }
+
+  private handleError<T>(operation='operation', result?:T) {
+    return (error: any): Observable<T> => {
+      // TODO: send the error to remote logging infrastructure
+      console.error(error); // log to console instead
+      // TODO: better job of transforming error for user consumption
+      this.log(`${operation} failed: ${error.message}`);
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
+
+
   getHeroes(): Observable<Heroe[]> {
     this.messageService.add('Obteniendo listado de héroes');
-    return this.httpClient.get<Heroe[]>(this.heroesUrl);
+    return this.httpClient.get<Heroe[]>(this.heroesUrl)
+    .pipe(
+      catchError(this.handleError('getHeroes', []))
+    )
   }
 
   getHeroeById(id: number): Observable<Heroe> {
