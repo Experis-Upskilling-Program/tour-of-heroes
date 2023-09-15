@@ -11,7 +11,10 @@ export class InMemoryDataService implements InMemoryDbService{
 
   constructor() { }
    createDb(reqInfo?: RequestInfo | undefined): {} | Observable<{}> | Promise<{}> {
-    return {HEROES}
+    return {heroes : HEROES}
+    //LA PROPIEDAD RETORNADA AQUÍ DEBE
+    //SER IGUAL AL DE LA RUTA SE SIMULACIÓN DEL SERVICIO
+    //(:base/:collectionName ===>>> api/heroes)
   }
 
   genId(heroes : Heroe[]) : number {

@@ -3,25 +3,29 @@ import { HEROES } from '../data/mock';
 import { Heroe } from '../interface/heroe';
 import { Observable, of } from 'rxjs';
 import { MessagesService } from './messages.service';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HeroesService {
   heroes: Heroe[] | undefined;
+  private heroesUrl = 'api/heroes'; //:base/:collectionName
 
-  constructor(private messageService: MessagesService) { }
+  constructor(
+    private messageService: MessagesService,
+    private httpClient: HttpClient
+  ) {}
 
   getHeroes(): Observable<Heroe[]> {
     this.messageService.add('Obteniendo listado de héroes');
-    return of(HEROES);
+    return this.httpClient.get<Heroe[]>(this.heroesUrl);
   }
 
   getHeroeById(id: number): Observable<Heroe> {
-    let list = HEROES.filter(hero => hero.id == id)
+    let list = HEROES.filter((hero) => hero.id == id);
 
-
-    return of(list[0])
+    return of(list[0]);
   }
 
   getTopHeroes(heroesNumber: number): Observable<Heroe[]> {
@@ -44,7 +48,10 @@ export class HeroesService {
     const randomHeroes: Heroe[] = [];
 
     do {
-      const randomSelection: number = this.getRandomArbitrary(0, HEROES.length - 1);
+      const randomSelection: number = this.getRandomArbitrary(
+        0,
+        HEROES.length - 1
+      );
       randomIndexes.add(randomSelection);
     } while (randomIndexes.size < heroesNumber);
 
