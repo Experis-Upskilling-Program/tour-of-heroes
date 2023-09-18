@@ -13,7 +13,7 @@ import { catchError, map, tap } from 'rxjs/operators';
 export class HeroesService{
   heroes: Heroe[] | undefined;
   private heroesUrl = 'api/heroes'; //:base/:collectionName
-
+  private heroe:Heroe[]=[]
 
   constructor(
     private messageService: MessagesService,
@@ -39,16 +39,17 @@ export class HeroesService{
 
   getHeroes(): Observable<Heroe[]> {
     this.messageService.add('Obteniendo listado de héroes');
-    return this.httpClient.get<Heroe[]>(this.heroesUrl)
+    return this.httpClient.get<Heroe[]>(this.heroesUrl)    //endpoint a la fake API: api/heroes
     .pipe(
       catchError(this.handleError('getHeroes', []))
     )
   }
 
-  getHeroeById(id: number): Observable<Heroe> {
-    let list = HEROES.filter((hero) => hero.id == id);
-
-    return of(list[0]);
+  getHeroeById(id: number): Observable<any> {
+    const url=`${this.heroesUrl}/${id}`   //endpoint a la fake API: api/heroes/id
+    return this.httpClient.get<any>(url).pipe(
+      catchError(this.handleError('getheroesid', []))
+    )
   }
 
   getTopHeroes(heroesNumber: number): Observable<Heroe[]> {

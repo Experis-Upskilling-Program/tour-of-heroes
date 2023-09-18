@@ -23,6 +23,7 @@ export class HeroesComponent implements OnInit{
 
   ngOnInit(): void {
     this.getHeroes();
+    this.messageService.add('obteniendo listado de heroes')
   }
 
   getHeroes(){
