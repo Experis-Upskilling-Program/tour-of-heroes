@@ -10,11 +10,12 @@ import { Heroe } from "../../interface/heroe";
 export class DashboardComponent implements OnInit{
   heroes!:Heroe[];
   ngOnInit(): void {
-    // this.heroesService.getTopHeroes(3).subscribe(data =>{
-    //   this.heroes=data;
-
-    // });
-    this.heroesService.getRandomHeroes(5).subscribe(data => {this.heroes = data});
+    this.heroesService.getTopHeroes(3).subscribe(data =>{
+      this.heroes=data;
+      console.log(data);
+      
+    });
+    //this.heroesService.getRandomHeroes(5).subscribe(data => {this.heroes = data});
   }
   constructor(private heroesService:HeroesService){
 

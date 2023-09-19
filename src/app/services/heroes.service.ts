@@ -4,7 +4,7 @@ import { Heroe } from '../interface/heroe';
 import { Observable, of } from 'rxjs';
 import { MessagesService } from './messages.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, filter, first, map, tap, take } from 'rxjs/operators';
 
 
 @Injectable({
@@ -53,14 +53,32 @@ export class HeroesService{
   }
 
   getTopHeroes(heroesNumber: number): Observable<Heroe[]> {
-    const sortHeroes = HEROES.sort((a, b) => b.score - a.score);
-    const topHeroes = [];
+    return this.httpClient.get<Heroe[]>(`${this.heroesUrl}`)    //endpoint a la fake API: api/heroes
+    .pipe( 
+      tap(heroes=>console.log(heroes)),
+      map(heroes=>[...heroes].sort((a,b)=> b.score-a.score)),
+      take(1),
+      //filter((sortHeroes, index) =>index<heroesNumber),
+      // tap(sortHeroes=>{
+      //   const topHeroes = [];
 
-    for (let i = 0; i < heroesNumber && heroesNumber < sortHeroes.length; i++) {
-      topHeroes.push(sortHeroes[i]);
-    }
+      //   for (let i = 0; i < heroesNumber && heroesNumber < sortHeroes.length; i++) {
+      //     topHeroes.push(sortHeroes[i]);
+      //   }
+      //   console.log(topHeroes);
+        
+      //   return [];  
+      // }),
+      catchError(this.handleError('getHeroes', []))
+    )
+    // const sortHeroes = HEROES.sort((a, b) => b.score - a.score);
+    // const topHeroes = [];
 
-    return of(topHeroes);
+    // for (let i = 0; i < heroesNumber && heroesNumber < sortHeroes.length; i++) {
+    //   topHeroes.push(sortHeroes[i]);
+    // }
+
+    // return of(topHeroes);
   }
 
   getRandomArbitrary(min: number, max: number) {
