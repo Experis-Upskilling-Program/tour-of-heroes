@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Heroe } from 'src/app/interface/heroe';
 import { HeroesService } from '../../services/heroes.service';
 import { MessagesService } from 'src/app/services/messages.service';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -12,6 +13,7 @@ import { MessagesService } from 'src/app/services/messages.service';
 })
 export class HeroesComponent implements OnInit{
   heroes:Heroe[]=[];
+  subscription!: Subscription;
 
   formHeroe = new FormGroup({
     name: new FormControl(''),
@@ -23,11 +25,16 @@ export class HeroesComponent implements OnInit{
 
   ngOnInit(): void {
     this.getHeroes();
-    this.messageService.add('obteniendo listado de heroes')
+    this.messageService.add('Obteniendo listado de heroes');
+  }
+
+  ngOnDestroy() {
+    console.log("Saliendo del heroes component")
+    this.subscription.unsubscribe();
   }
 
   getHeroes(){
-    this.heroesService.getHeroes().subscribe(data =>{
+    this.subscription = this.heroesService.getHeroes().subscribe(data =>{
       // console.log(data);
       this.heroes=data;
     });

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Heroe } from 'src/app/interface/heroe';
 import { HeroesService } from 'src/app/services/heroes.service';
 import { Location } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-detail-hero',
@@ -11,6 +12,7 @@ import { Location } from '@angular/common';
 })
 export class DetailHeroComponent implements OnInit {
   heroe: Heroe | undefined;
+  subscription!: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,9 +24,14 @@ export class DetailHeroComponent implements OnInit {
     const id: number | null = Number(this.route.snapshot.paramMap.get('id'));
 
 
-    this.heroeService.getHeroeById(id).subscribe((data) => {
+    this.subscription = this.heroeService.getHeroeById(id).subscribe((data) => {
       this.heroe = data;
     });
+  }
+
+  ngOnDestroy() {
+    console.log("Saliendo del detail-hero component")
+    this.subscription.unsubscribe();
   }
 
   goBack(): void {

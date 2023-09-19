@@ -11,6 +11,10 @@ export class MessagesComponent {
 
   constructor(private messageService: MessagesService) {}
 
+  ngOnInit() {
+    this.getMessages();
+  }
+
   getMessages() {
     console.log(this.messageService.message)
     this.messages = this.messageService.message;

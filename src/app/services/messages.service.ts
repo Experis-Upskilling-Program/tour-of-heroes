@@ -6,11 +6,10 @@ import { Injectable } from '@angular/core';
 export class MessagesService {
   constructor() {
     console.log(this.messages);
-    
   }
 
   //messages: Array<string> = []
-  messages: string[] = ["holaaa"]
+  messages: string[] = [];
 
   get message(){
     console.log(this.messages)
