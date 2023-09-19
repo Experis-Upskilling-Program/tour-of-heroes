@@ -14,6 +14,7 @@ export class HeroesService{
   heroes: Heroe[] | undefined;
   private heroesUrl = 'api/heroes'; //:base/:collectionName
   private heroe:Heroe[]=[]
+  httpOptions = {headers: new HttpHeaders({'Content-Type': 'application/json'})};
 
   constructor(
     private messageService: MessagesService,
@@ -54,7 +55,7 @@ export class HeroesService{
 
   getTopHeroes(heroesNumber: number): Observable<Heroe[]> {
     return this.httpClient.get<Heroe[]>(`${this.heroesUrl}`)    //endpoint a la fake API: api/heroes
-    .pipe( 
+    .pipe(
       tap(heroes=>console.log(heroes)),
       map(heroes=>[...heroes].sort((a,b)=> b.score-a.score)),
       take(1),
@@ -66,8 +67,8 @@ export class HeroesService{
       //     topHeroes.push(sortHeroes[i]);
       //   }
       //   console.log(topHeroes);
-        
-      //   return [];  
+
+      //   return [];
       // }),
       catchError(this.handleError('getHeroes', []))
     )
@@ -102,5 +103,12 @@ export class HeroesService{
     }
 
     return of(randomHeroes);
+  }
+
+  updateHero(hero: Heroe): Observable<any> {
+    return this.httpClient.put(this.heroesUrl, hero, this.httpOptions)
+    .pipe(
+      catchError(this.handleError('Updating hero failed'))
+    )
   }
 }
