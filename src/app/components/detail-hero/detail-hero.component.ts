@@ -4,6 +4,7 @@ import { Heroe } from 'src/app/interface/heroe';
 import { HeroesService } from 'src/app/services/heroes.service';
 import { Location } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { MessagesService } from 'src/app/services/messages.service';
 
 @Component({
   selector: 'app-detail-hero',
@@ -17,12 +18,13 @@ export class DetailHeroComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private heroeService: HeroesService,
-    private location: Location
+    private location: Location,
+    private messageService: MessagesService
   ) {}
 
   ngOnInit(): void {
     const id: number | null = Number(this.route.snapshot.paramMap.get('id'));
-
+    this.messageService.add(`Heroe seleccionado id: ${id}`);
 
     this.subscription = this.heroeService.getHeroeById(id).subscribe((data) => {
       this.heroe = data;
@@ -41,7 +43,10 @@ export class DetailHeroComponent implements OnInit {
 
   save(): void {
     if(this.heroe) {
-      this.heroeService.updateHero(this.heroe).subscribe(() => this.goBack());
+      this.heroeService.updateHero(this.heroe).subscribe(() => {
+        this.messageService.add(`Actualizando al heroe con id ${this.heroe?.id}`)
+        this.goBack();
+      });
     }
   }
 }
