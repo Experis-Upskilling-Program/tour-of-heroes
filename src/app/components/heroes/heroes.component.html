@@ -5,6 +5,7 @@
   <ul class="hero-information" *ngFor="let hero of heroes" (click)="onSelected(hero)">
     <li>
       <a routerLink="/detail-hero/{{hero.id}}">{{hero.name}} <span class="hero-alterego" *ngIf="hero.alterego">({{hero.alterego}})</span></a>
+      <button (click)="onDelete(hero)">Delete</button>
     </li>
   </ul>
 </section>

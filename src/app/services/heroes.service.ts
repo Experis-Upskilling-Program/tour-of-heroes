@@ -111,4 +111,12 @@ export class HeroesService{
       catchError(this.handleError('Updating hero failed'))
     )
   }
+
+  deleteHero(id: number): Observable<any> {
+    const url=`${this.heroesUrl}/${id}`;
+    return this.httpClient.delete(url, this.httpOptions)
+    .pipe(
+      catchError(this.handleError('Deleting hero operation failed'))
+    )
+  }
 }

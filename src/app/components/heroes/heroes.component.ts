@@ -14,12 +14,13 @@ import { Subscription } from 'rxjs';
 export class HeroesComponent implements OnInit{
   heroes:Heroe[]=[];
   subscription!: Subscription;
+  selectedHero: Heroe | undefined;
 
+  // Definición de la agrupación de campos de formulario (Usando reactive forms)
   formHeroe = new FormGroup({
     name: new FormControl(''),
     alterego: new FormControl(''),
   });
-
 
   constructor(private heroesService:HeroesService, private messageService:MessagesService){}
 
@@ -38,18 +39,20 @@ export class HeroesComponent implements OnInit{
       // console.log(data);
       this.heroes=data;
     });
-
   }
 
-  selectedHero: Heroe | undefined;
+  onSubmit () {
+    console.log(this.formHeroe.value);
+  }
 
-    onSubmit () {
-      console.log(this.formHeroe.value);
-    }
+  onSelected(hero: Heroe): void {
+    console.log(hero);
+    this.selectedHero = hero;
+    this.messageService.add(`Estoy seleccionando al heroe: ${hero.name}`)
+  }
 
-    onSelected(hero: Heroe): void {
-      console.log(hero);
-      this.selectedHero = hero;
-      this.messageService.add(`Estoy seleccionando al heroe: ${hero.name}`)
-    }
+  onDelete(hero: Heroe): void {
+    this.heroes = this.heroes.filter((heroe) => heroe != hero);
+    this.heroesService.deleteHero(hero.id).subscribe();
+  }
 }
