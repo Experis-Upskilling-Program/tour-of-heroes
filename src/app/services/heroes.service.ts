@@ -39,9 +39,9 @@ export class HeroesService{
 
 
   getHeroes(): Observable<Heroe[]> {
-    this.messageService.add('Obteniendo listado de héroes');
     return this.httpClient.get<Heroe[]>(this.heroesUrl)    //endpoint a la fake API: api/heroes
     .pipe(
+      tap(() => this.messageService.add(`Getting the heroes list`)),
       catchError(this.handleError('getHeroes', []))
     )
   }
@@ -56,9 +56,9 @@ export class HeroesService{
   getTopHeroes(heroesNumber: number): Observable<Heroe[]> {
     return this.httpClient.get<Heroe[]>(`${this.heroesUrl}`)    //endpoint a la fake API: api/heroes
     .pipe(
-      tap(heroes=>console.log(heroes)),
       map(heroes=>[...heroes].sort((a,b)=> b.score-a.score)),
       take(1),
+      tap(() => this.messageService.add(`Getting a list of ${heroesNumber} heroes sorted by score`)),
       //filter((sortHeroes, index) =>index<heroesNumber),
       // tap(sortHeroes=>{
       //   const topHeroes = [];
@@ -101,13 +101,14 @@ export class HeroesService{
     for (const index of randomIndexes) {
       randomHeroes.push(HEROES[index]);
     }
-
+    this.messageService.add(`Getting a list of ${heroesNumber} heroes chosen randomly`);
     return of(randomHeroes);
   }
 
   updateHero(hero: Heroe): Observable<any> {
     return this.httpClient.put(this.heroesUrl, hero, this.httpOptions)
     .pipe(
+      tap(() => this.messageService.add(`Updating the hero with id ${hero?.id}`)),
       catchError(this.handleError('Updating hero failed'))
     )
   }
@@ -116,6 +117,7 @@ export class HeroesService{
     const url=`${this.heroesUrl}/${id}`;
     return this.httpClient.delete(url, this.httpOptions)
     .pipe(
+      tap(() => this.messageService.add(`Deleting the hero with id ${id}`)),
       catchError(this.handleError('Deleting hero operation failed'))
     )
   }

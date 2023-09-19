@@ -26,7 +26,7 @@ export class HeroesComponent implements OnInit{
 
   ngOnInit(): void {
     this.getHeroes();
-    this.messageService.add('Obteniendo listado de heroes');
+    // this.messageService.add('Obteniendo listado de heroes');
   }
 
   ngOnDestroy() {
@@ -54,6 +54,6 @@ export class HeroesComponent implements OnInit{
   onDelete(hero: Heroe): void {
     this.heroes = this.heroes.filter((heroe) => heroe != hero);
     this.heroesService.deleteHero(hero.id).subscribe();
-    this.messageService.add(`Eliminando al heroe con id ${hero.id}`);
+    // this.messageService.add(`Eliminando al heroe con id ${hero.id}`);
   }
 }

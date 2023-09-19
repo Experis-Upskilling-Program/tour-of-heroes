@@ -17,14 +17,13 @@ export class DashboardComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.subscription = this.heroesService.getTopHeroes(3).subscribe(data =>{
-      this.heroes=data;
-      console.log(data);
+    // this.subscription = this.heroesService.getTopHeroes(3).subscribe(data =>{
+    //   this.heroes=data;
+    //   console.log(data);
 
-    });
+    // });
 
-    console.log(this.subscription);
-    //this.heroesService.getRandomHeroes(5).subscribe(data => {this.heroes = data});
+    this.subscription = this.heroesService.getRandomHeroes(5).subscribe(data => {this.heroes = data});
   }
 
   ngOnDestroy() {

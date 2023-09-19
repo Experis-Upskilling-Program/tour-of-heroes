@@ -44,7 +44,7 @@ export class DetailHeroComponent implements OnInit {
   save(): void {
     if(this.heroe) {
       this.heroeService.updateHero(this.heroe).subscribe(() => {
-        this.messageService.add(`Actualizando al heroe con id ${this.heroe?.id}`)
+        // this.messageService.add(`Actualizando al heroe con id ${this.heroe?.id}`)
         this.goBack();
       });
     }
