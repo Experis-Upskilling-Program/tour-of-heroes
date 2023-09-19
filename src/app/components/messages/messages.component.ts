@@ -21,6 +21,6 @@ export class MessagesComponent {
   }
 
   clear() {
-    this.messageService.clear();
+    this.messages = this.messageService.clear();
   }
 }

@@ -23,6 +23,7 @@ export class MessagesService {
   }
 
   clear() {
-    this.messages = []
+    console.log('Limpiando')
+    return this.messages = [];
   }
 }
